@@ -2,34 +2,40 @@ import React from "react";
 import planets from "../data/data.json";
 import iconHamburger from "../assets/images/icon-hamburger.svg";
 import { useIsMenuOpen } from "../context/isMenuOpenContext";
-import iconChevron from "../assets/images/icon-chevron.svg";
+
+import MobileMenu from "./MobileMenu";
 
 export default function Header() {
   const { isMenuOpen, setIsMenuOpen } = useIsMenuOpen();
   return (
-    <div className="flex justify-between px-6 py-4 items-center text-white md:flex-col md:gap-10 lg:flex-row relative">
-      <h1 className="text-4xl">The Planets</h1>
-      <div className="">
-        <button
-          onClick={() => {
-            setIsMenuOpen(!isMenuOpen);
-          }}
-        >
-          <img src={iconHamburger} alt="" className="md:hidden" />
-        </button>
-        {/* Maybe differnt layout, try this mapping outside of header, even a new compoenet maybe  */}
-        {isMenuOpen && (
-          <div className="">
-            {planets.map((planet) => (
-              <div key={planet.name} className="bg-black">
-                <img src="" alt="" />
-                <p>{planet.name}</p>
-                <img src={iconChevron} alt="" />
-              </div>
-            ))}
-          </div>
-        )}
+    <>
+      <div className="flex justify-between items-center md:flex-col md:gap-8 lg:flex-row">
+        <h1 className="text-4xl">The Planets</h1>
+        <div className="">
+          <button
+            onClick={() => {
+              setIsMenuOpen(!isMenuOpen);
+              console.log(isMenuOpen);
+            }}
+          >
+            <img
+              src={iconHamburger}
+              alt=""
+              className={`md:hidden cursor-pointer ${
+                isMenuOpen ? "opacity-30" : "opacity-100"
+              }`}
+            />
+          </button>
+        </div>
+        <div className="w-full justify-around hidden md:flex lg:w-3/5">
+          {planets.map((planet) => (
+            <div key={planet.name}>
+              <p className="text-2xl cursor-pointer">{planet.name}</p>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+      <div>{isMenuOpen && <MobileMenu />}</div>
+    </>
   );
 }
