@@ -4,11 +4,7 @@ const ActiveTabContext = createContext();
 // 2. Create Provider
 export function ActiveTabProvider({ children }) {
   const [ActiveTab, setActiveTab] = useState("Overview");
-  
-//  const handleActiveTab = (tab) => {
-//     setActiveTab(tab);
-//     console.log(ActiveTab);
-//  }
+
   return (
     <ActiveTabContext.Provider value={{ ActiveTab, setActiveTab}}>
       {children}

@@ -5,7 +5,7 @@ import { IsMenuOpenProvider } from "./context/isMenuOpenContext";
 import { ActiveTabProvider } from "./context/ActiveTabContext";
 function App() {
   return (
-    <>
+    <div style={{ backgroundColor: "#070724" }} className="h-screen">
       <IsMenuOpenProvider>
         <ActiveTabProvider>
           <Layout>
@@ -18,7 +18,7 @@ function App() {
       </IsMenuOpenProvider>
 
       {/* When defining routes wrap content in Routes tag and use Route path tag for each....home page will be path "/"  */}
-    </>
+    </div>
   );
 }
 

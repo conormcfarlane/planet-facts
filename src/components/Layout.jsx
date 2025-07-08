@@ -4,10 +4,7 @@ import Tabs from "./Tabs";
 
 export default function Layout({ children }) {
   return (
-    <div
-      className=" text-white px-6 py-4"
-      style={{ backgroundColor: "#070724" }}
-    >
+    <div className=" text-white " >
       <Header />
       <Tabs />
       <main>{children}</main>
