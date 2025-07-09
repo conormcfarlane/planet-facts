@@ -7,7 +7,7 @@ import { useIsMenuOpen } from "../context/isMenuOpenContext";
 export default function MobileMenu() {
   const { isMenuOpen, setIsMenuOpen } = useIsMenuOpen();
   return (
-    <div className="mt-10 flex flex-col">
+    <div className="mt-10 flex flex-col px-6 h-screen">
       {planets.map((planet, index) => (
         <Link key={planet.name} to={`/${planet.name.toLowerCase()}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
           <div
