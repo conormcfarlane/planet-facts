@@ -8,11 +8,11 @@ export default function GeologyStats({planet}) {
         {label : "AVERAGE TEMP.", key: "temperature"},
     ]
   return (
-    <div className='w-full flex flex-col gap-2 '>
+    <div className='w-full flex flex-col gap-2 md:flex-row '>
         {statistics.map((statistic) => (
-            <div key={statistic.key} className='flex justify-between px-6 py-2 border border-gray-400' >
+            <div key={statistic.key} className='flex md:flex-1 flex-col justify-between px-6 py-2 border border-gray-400 ' >
                 <p>{statistic.label}</p>
-                <p>{planet[statistic.key]}</p>
+                <p className='md:text-3xl md:tracking-tighter'>{planet[statistic.key]}</p>
             </div>
         ))}
     </div>

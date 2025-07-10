@@ -9,7 +9,7 @@ export default function Header() {
   const { isMenuOpen, setIsMenuOpen } = useIsMenuOpen();
   return (
     <>
-      <div className="flex justify-between items-center px-6 py-4 pb-4 border-b border-gray-800 md:flex-col md:gap-8 lg:flex-row">
+      <div className="flex justify-between items-center w-full px-6 py-4 pb-4 border-b border-gray-800 md:flex-col md:gap-5 md:pb-9 lg:flex-row">
         <h1 className="text-4xl">The Planets</h1>
         <div className="">
           <button

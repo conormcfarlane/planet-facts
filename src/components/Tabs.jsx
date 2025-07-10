@@ -7,10 +7,10 @@ export default function () {
   const {isMenuOpen} = useIsMenuOpen();
   
   return (
-    <div className={`flex w-full justify-between border-b border-gray-800 px-6 py-4 ${isMenuOpen && "hidden"}`}>
+    <div className={`flex w-full justify-between border-b border-gray-800 md:border-none md:flex-col md:gap-4 px-6 ${isMenuOpen && "hidden"}`}>
       {tabs.map((tab) => (
         <div key={tab}>
-          <p className={`cursor-pointer text-gray-500 ${ActiveTab === tab ? " text-white border-b" : ""}`} onClick={() => {console.log("clicked",tab)
+          <p className={`py-3 cursor-pointer text-gray-500 ${ActiveTab === tab ? " text-white border-b md:bg-red-400" : ""} md:border md:border-gray-700 md:px-4 md:py-4`} onClick={() => {console.log("clicked",tab)
           console.log("cureent active :",ActiveTab)
             setActiveTab(tab)
           }}
