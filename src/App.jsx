@@ -1,23 +1,17 @@
-import { Routes, Route, Navigate } from "react-router-dom";
-import Layout from "./components/Layout";
-import PlanetPage from "./components/PlanetPage";
-import { IsMenuOpenProvider } from "./context/isMenuOpenContext";
-import { ActiveTabProvider } from "./context/ActiveTabContext";
+import React from "react";
+import Layout from "./components/layout";
+import { MenuProvider } from "./context/MenuContext";
+import { Routes, Route } from "react-router-dom";
 function App() {
   return (
-    <div className="h-screen">
-      <IsMenuOpenProvider>
-        <ActiveTabProvider>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Navigate to="/mercury" />} />
-              <Route path="/:planetName" element={<PlanetPage />} />
-            </Routes>
-          </Layout>
-        </ActiveTabProvider>
-      </IsMenuOpenProvider>
-
-      {/* When defining routes wrap content in Routes tag and use Route path tag for each....home page will be path "/"  */}
+    <div className="bg-gray-700 text-white">
+      <MenuProvider>
+        <Layout>
+          <Routes>
+            <Route path="/" element />
+          </Routes>
+        </Layout>
+      </MenuProvider>
     </div>
   );
 }

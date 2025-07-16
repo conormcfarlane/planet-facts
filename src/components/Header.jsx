@@ -1,45 +1,24 @@
 import React from "react";
-import planets from "../data/data.json";
 import iconHamburger from "../assets/images/icon-hamburger.svg";
-import { useIsMenuOpen } from "../context/isMenuOpenContext";
-import { Link } from "react-router-dom";
-import MobileMenu from "./MobileMenu";
-
+import { useMenu } from "../context/MenuContext";
+import planets from "../data/data.json";
 export default function Header() {
-  const { isMenuOpen, setIsMenuOpen } = useIsMenuOpen();
+  const { isMenuOpen, toggleMenu } = useMenu();
   return (
-    <>
-      <div className="flex justify-between items-center w-full px-6 py-4 pb-4 border-b border-gray-800 md:flex-col md:gap-5 md:pb-9 lg:flex-row">
-        <h1 className="text-4xl">The Planets</h1>
-        <div className="">
-          <button
-            onClick={() => {
-              setIsMenuOpen(!isMenuOpen);
-              console.log(isMenuOpen);
-            }}
-          >
-            <img
-              src={iconHamburger}
-              alt=""
-              className={`md:hidden cursor-pointer ${
-                isMenuOpen ? "opacity-30" : "opacity-100"
-              }`}
-            />
-          </button>
-        </div>
-        <div className="w-full justify-around hidden md:flex lg:w-3/5">
+    <section className="border-b border-gray-500">
+      <div className="flex justify-between px-6 py-4 md:flex-col md:items-center md:gap-10 md: md:px-12 md:py-8 lg:flex-row lg:px-10 lg:py-6">
+        <h1 className="text-3xl font-semibold tracking-tighter ">
+          THE PLANETS
+        </h1>
+        <button className="w-6 md:hidden" onClick={toggleMenu}>
+          <img src={iconHamburger} alt="Menu open button" />
+        </button>
+        <div className="hidden md:flex md:w-full md:justify-around lg:w-6/10">
           {planets.map((planet) => (
-            <Link
-              key={planet.name}
-              to={`/${planet.name.toLowerCase()}`}
-              className="text-2xl cursor-pointer"
-            >
-              {planet.name}
-            </Link>
+            <div key={planet.name}>{planet.name}</div>
           ))}
         </div>
       </div>
-      <div>{isMenuOpen && <MobileMenu />}</div>
-    </>
+    </section>
   );
 }

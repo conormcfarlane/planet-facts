@@ -1,13 +1,11 @@
 import React from "react";
-import Header from "./Header";
-import Tabs from "./Tabs";
-
-export default function Layout({ children }) {
+import Header from "../components/Header";
+import MobileMenu from "./MobileMenu";
+export default function Layout() {
   return (
-    <div className=" text-white " style={{ backgroundColor: "#070724" }}>
+    <div>
       <Header />
-    
-      <main>{children}</main>
+      <MobileMenu/>
     </div>
   );
 }
