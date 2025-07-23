@@ -4,7 +4,7 @@ import iconChevron from "../assets/images/icon-chevron.svg";
 
 export default function MobileMenu() {
   return (
-    <div className="px-6">
+    <div className="px-6 md:hidden">
       {planets.map((planet) => (
         <div
           key={planet.name}

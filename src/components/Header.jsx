@@ -2,6 +2,7 @@ import React from "react";
 import iconHamburger from "../assets/images/icon-hamburger.svg";
 import { useMenu } from "../context/MenuContext";
 import planets from "../data/data.json";
+import { Link } from "react-router-dom";
 export default function Header() {
   const { isMenuOpen, toggleMenu } = useMenu();
   return (
@@ -15,7 +16,9 @@ export default function Header() {
         </button>
         <div className="hidden md:flex md:w-full md:justify-around lg:w-6/10">
           {planets.map((planet) => (
-            <div key={planet.name}>{planet.name}</div>
+            <Link key={planet.name} to={`/${planet.name.toLowerCase()}`}>
+              {planet.name}
+            </Link>
           ))}
         </div>
       </div>
