@@ -1,6 +1,9 @@
 import React from "react";
 import planets from "../data/data.json";
 import { useParams } from "react-router-dom";
+import iconSource from "../assets/images/icon-source.svg";
+import GeologyStats from "./GeologyStats";
+import Tabs from "./Tabs";
 
 // Import all SVG's
 const images = import.meta.glob("../assets/images/*.svg", {
@@ -23,28 +26,45 @@ export default function PlanetPage() {
   const imageUrl = images[`../assets/images/${filename}`];
 
   return (
-    <section className="flex flex-col gap-20">
-      <div className="bg-amber-800 flex justify-center items-center h-[230px]">
-        <img src={imageUrl} alt={planet.name} className="w-[100px] h-[100px]" />
+    <section className="">
+      <div className="md:hidden">
+        <Tabs />
       </div>
-      <div>
-        <div className="text-center flex flex-col gap-7">
-          <h1>{planet.name}</h1>
-          <p>{planet.overview.content}</p>
-          <p>
-            Source :{" "}
-            <span className="underline cursor-pointer">
-              <a
-                href={planet.overview.source}
-                target="_blank"
-                rel="noopener norefferer"
-              >
-                Wikipedia
-              </a>
-            </span>
-          </p>
+      <div className="flex flex-col">
+        <div className="flex justify-center items-center h-[230px]">
+          <img
+            src={imageUrl}
+            alt={planet.name}
+            className="w-[100px] h-[100px]"
+          />
         </div>
-        <div className="hidden">{/* tabs */}</div>
+        <div className="md:flex">
+          <div className="flex flex-col gap-7 items-center px-6 md:items-start md:px-6">
+            <h1 className="text-6xl">{planet.name}</h1>
+            <p className="text-sm">{planet.overview.content}</p>
+            <div className="flex gap-2">
+              <p>
+                Source :{" "}
+                <span className="underline cursor-pointer">
+                  <a
+                    href={planet.overview.source}
+                    target="_blank"
+                    rel="noopener norefferer"
+                  >
+                    Wikipedia
+                  </a>
+                </span>
+              </p>
+              <img src={iconSource} alt="" className="h-3 self-center" />
+            </div>
+          </div>
+          <div className="hidden md:block">
+            <Tabs />
+          </div>
+        </div>
+        <div className="mt-6">
+          <GeologyStats planet={planet} />
+        </div>
       </div>
     </section>
   );

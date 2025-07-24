@@ -6,7 +6,7 @@ export const MenuProvider = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Toggle function
-  const toggleMenu = () => setIsMenuOpen((prevMode) => !prevMode)
+  const toggleMenu = () => setIsMenuOpen((prevMode) => !prevMode);
 
   return (
     <MenuContext.Provider value={{ isMenuOpen, setIsMenuOpen, toggleMenu }}>
