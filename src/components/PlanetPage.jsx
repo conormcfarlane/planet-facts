@@ -4,6 +4,7 @@ import iconSource from "../Assets/Images/icon-source.svg";
 import { useParams } from "react-router-dom";
 import planets from "../Data/data.json";
 import { useTab } from "../Context/TabContext";
+import GeologyStats from "./GeologyStats";
 
 const images = import.meta.glob(`../Assets/Images/*.{svg,png}`, {
   eager: true,
@@ -51,14 +52,14 @@ export default function PlanetPage() {
           <h2 className="text-5xl font-[Antonio]">
             {planet.name.toUpperCase()}
           </h2>
-          <p>{planet[dataKey].content}</p>
-          <div className="flex gap-2 items-center text-sm">
+          <p className="text-[#838391]">{planet[dataKey].content}</p>
+          <div className="flex gap-2 items-center text-sm text-[#838391]">
             <p>Source :</p>
             <a
               href={planet[dataKey].source}
               target="_blank"
               rel="noopener noreferrer"
-              className="cursor-pointer underline"
+              className="cursor-pointer underline "
             >
               Wikipedia
             </a>
@@ -66,6 +67,7 @@ export default function PlanetPage() {
           </div>
         </div>
       </section>
+      <GeologyStats planet={planet} />
     </div>
   );
 }

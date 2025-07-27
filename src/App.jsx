@@ -8,7 +8,7 @@ import { MenuContextProvider } from "./Context/MenuContext";
 function App() {
   return (
     <div
-      className="bg-gray-800 h-screen"
+      className="bg-[#070724] h-max"
       style={{ backgroundImage: `url(${backgroundStars})` }}
     >
       <TabContextProvider>
