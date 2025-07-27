@@ -1,14 +1,13 @@
 import React from "react";
-import Header from "../components/Header";
+import Header from "./Header";
+import { useMenu } from "../Context/MenuContext";
 import MobileMenu from "./MobileMenu";
-import { useMenu } from "../context/MenuContext";
-export default function Layout({ children }) {
+export default function layout({ children }) {
   const { isMenuOpen } = useMenu();
   return (
-    <div>
+    <div className="text-white px-6 py-4">
       <Header />
-      {isMenuOpen && <MobileMenu />}
-      {children}
+      {isMenuOpen ? <MobileMenu /> : children}
     </div>
   );
 }

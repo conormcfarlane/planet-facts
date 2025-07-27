@@ -1,27 +1,21 @@
 import React from "react";
-import iconHamburger from "../assets/images/icon-hamburger.svg";
-import { useMenu } from "../context/MenuContext";
-import planets from "../data/data.json";
-import { Link } from "react-router-dom";
+import iconHamburger from "../Assets/Images/icon-hamburger.svg";
+import { useMenu } from "../Context/MenuContext";
 export default function Header() {
-  const { isMenuOpen, toggleMenu } = useMenu();
+  const { handleMenuClick, isMenuOpen } = useMenu();
   return (
-    <section className="border-b border-gray-500">
-      <div className="flex justify-between px-6 py-4 md:flex-col md:items-center md:gap-10 md: md:px-12 md:py-8 lg:flex-row lg:px-10 lg:py-6">
-        <h1 className="text-3xl font-semibold tracking-tighter ">
+    <>
+      <div className="flex justify-between items-center pb-4">
+        <h1 className="text-[1.8rem] tracking-[-1.05px] font-[Antonio] ">
           THE PLANETS
         </h1>
-        <button className="w-6 md:hidden" onClick={toggleMenu}>
-          <img src={iconHamburger} alt="Menu open button" />
-        </button>
-        <div className="hidden md:flex md:w-full md:justify-around lg:w-6/10">
-          {planets.map((planet) => (
-            <Link key={planet.name} to={`/${planet.name.toLowerCase()}`}>
-              {planet.name}
-            </Link>
-          ))}
-        </div>
+        <img
+          src={iconHamburger}
+          alt=""
+          className="w-6 h-4 cursor-pointer"
+          onClick={handleMenuClick}
+        />
       </div>
-    </section>
+    </>
   );
 }

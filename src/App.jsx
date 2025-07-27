@@ -1,23 +1,29 @@
 import React from "react";
-import Layout from "./components/layout";
-import { MenuProvider } from "./context/MenuContext";
-import { ActiveTabProvider } from "./context/ActiveTabContext";
-import { Routes, Route } from "react-router-dom";
-import { Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Layout from "./Components/Layout";
 import PlanetPage from "./components/PlanetPage";
+import backgroundStars from "./Assets/Images/background-stars.svg";
+import { TabContextProvider } from "./Context/TabContext";
+import { MenuContextProvider } from "./Context/MenuContext";
 function App() {
   return (
-    <div className="bg-gray-700 text-white">
-      <MenuProvider>
-        <ActiveTabProvider>
+    <div
+      className="bg-gray-800 h-screen"
+      style={{ backgroundImage: `url(${backgroundStars})` }}
+    >
+      <TabContextProvider>
+        <MenuContextProvider>
           <Layout>
             <Routes>
-              <Route path="/" element={<Navigate to="/mercury" replace />} />
-              <Route path="/:planetName" element={<PlanetPage />} />
+              <Route
+                path="/"
+                element={<Navigate to="/mercury" replace />}
+              ></Route>
+              <Route path="/:planetName" element={<PlanetPage />}></Route>
             </Routes>
           </Layout>
-        </ActiveTabProvider>
-      </MenuProvider>
+        </MenuContextProvider>
+      </TabContextProvider>
     </div>
   );
 }

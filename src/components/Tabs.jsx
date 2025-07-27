@@ -1,20 +1,38 @@
 import React from "react";
-import { useActiveTab } from "../context/ActiveTabContext";
+import { useTab } from "../Context/TabContext";
 
-export default function Tabs() {
-  const tabs = ["Overview", "Structure", "Surface"];
-  const { selectedTab, setSelectedTab } = useActiveTab();
+const mobileTabs = [
+  { key: "overview", label: "OVERVIEW" },
+  { key: "structure", label: "STRUCTURE" },
+  { key: "geology", label: "SURFACE" },
+];
+const desktopTabs = [
+  { key: "overview", label: "01 OVERVIEW" },
+  { key: "structure", label: "02 INTERNAL STRUCTURE" },
+  { key: "geology", label: "03 SURFACE GEOLOGY" },
+];
+
+export default function Tabs({ planet }) {
+  const { activeTab, setActiveTab } = useTab("");
+
   return (
-    <div>
-      <div className="flex justify-between px-6 mt-3">
-        {tabs.map((tab) => (
-          <div key={tab} className={`border-b-2 pb-3 cursor-pointer ${tab === selectedTab ? "border-red-500" : ""}`}
-           onClick={() => setSelectedTab(tab)}>
-            {tab}
-          </div>
+    <>
+      {/* Mobile Tabs */}
+      <div className="flex justify-between pt-4 border-t border-b -mx-6 px-6">
+        {mobileTabs.map((tab) => (
+          <p
+            key={tab.key}
+            // PASSed PLANET IN AS PROP TO RECIEVE BORDER-B COLOR TO MATCH PLANET DISPLAYED
+            style={{ borderColor: planet.color }}
+            className={`text-sm pb-3 cursor-pointer ${
+              activeTab === tab.key ? "border-b-4" : "border-none"
+            }`}
+            onClick={() => setActiveTab(tab.key)}
+          >
+            {tab.label}
+          </p>
         ))}
       </div>
-      <hr className="border-t-1 border-gray-500" />
-    </div>
+    </>
   );
 }

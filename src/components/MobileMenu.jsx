@@ -1,24 +1,31 @@
 import React from "react";
-import planets from "../data/data.json";
-import iconChevron from "../assets/images/icon-chevron.svg";
+import planets from "../Data/data.json";
+import iconChevron from "../Assets/Images/icon-Chevron.svg";
 import { Link } from "react-router-dom";
-import { useMenu } from "../context/MenuContext";
+import { useMenu } from "../Context/MenuContext";
 
 export default function MobileMenu() {
-  const {setIsMenuOpen} = useMenu();
+  const { handleMenuClick } = useMenu();
   return (
-    <div className="px-6 md:hidden">
-      {planets.map((planet) => (
-        <Link key={planet.name} to={`/${planet.name.toLowerCase()}`}
-        onClick={() => setIsMenuOpen(false)}>
-          <div className="flex justify-between py-4 gap-6 items-center border-b border-gray-500">
-            <div
-              className="w-4 h-4 rounded-full"
-              style={{ backgroundColor: planet.color }}
-            ></div>
-            <p className="flex-1">{planet.name.toUpperCase()}</p>
-            <img src={iconChevron} alt="arrow to planet" />
-          </div>
+    <div className="">
+      {planets.map((planet, index) => (
+        <Link
+          key={planet}
+          className={`flex items-center gap-6 py-5 border-b border-gray-700 ${
+            index === planets.length - 1 ? "border-none" : null
+          }`}
+          //   If Index = planetsLength(8) -1 ie.7/Neptune, remove Border
+          to={`/${planet.name.toLowerCase()}`}
+          onClick={handleMenuClick}
+        >
+          <div
+            className="h-5 w-5 rounded-full"
+            style={{ backgroundColor: planet.color }}
+          ></div>
+          <p className="flex-1 text-lg font-bold tracking-[1.36px]">
+            {planet.name.toUpperCase()}
+          </p>
+          <img src={iconChevron} alt="" />
         </Link>
       ))}
     </div>

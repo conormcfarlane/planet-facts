@@ -1,71 +1,71 @@
 import React from "react";
-import planets from "../data/data.json";
-import { useParams } from "react-router-dom";
-import iconSource from "../assets/images/icon-source.svg";
-import GeologyStats from "./GeologyStats";
 import Tabs from "./Tabs";
+import iconSource from "../Assets/Images/icon-source.svg";
+import { useParams } from "react-router-dom";
+import planets from "../Data/data.json";
+import { useTab } from "../Context/TabContext";
 
-// Import all SVG's
-const images = import.meta.glob("../assets/images/*.svg", {
+const images = import.meta.glob(`../Assets/Images/*.{svg,png}`, {
   eager: true,
-  query: "?url",
   import: "default",
 });
 
 export default function PlanetPage() {
-  const { planetName } = useParams();
+  const { planetName } = useParams(); //Planet name from URL translate
+  const { activeTab } = useTab();
+  // dataKey used for dynamically rendering Json data
+  const dataKey = activeTab;
+
+  // Assigns new values as original tab keys are differnt to values in JSON file
+  const imageKeyMap = {
+    overview: "planet",
+    structure: "internal",
+    geology: "geology",
+  };
+  // Uses activeTab to decide what key to choose from imageKeyMap
+  const imageKey = imageKeyMap[activeTab];
+
+  // Finds the planet by name
   const planet = planets.find(
     (p) => p.name.toLowerCase() === planetName.toLowerCase()
   );
+  // Error handle
+  if (!planet) return <p>PLANET NOT FOUND !</p>;
 
-  if (!planet) return <div>Planet not found.</div>;
+  // Get filename from JSON and match imported Images... Splits by character / pop selects last part.
+  const planetFileName = planet.images[imageKey].split("/").pop();
 
-  // filename for JSON
-  const filename = planet.images.planet.split("/").pop();
-  // Get the image URL for imported images
-  const imageUrl = images[`../assets/images/${filename}`];
+  // Url that uses planetFileNam to get correct image from images folder defined at top
+  const planetImageUrl = images[`../Assets/Images/${planetFileName}`];
 
   return (
-    <section className="">
-      <div className="md:hidden">
-        <Tabs />
-      </div>
-      <div className="flex flex-col">
-        <div className="flex justify-center items-center h-[230px]">
-          <img
-            src={imageUrl}
-            alt={planet.name}
-            className="w-[100px] h-[100px]"
-          />
-        </div>
-        <div className="md:flex">
-          <div className="flex flex-col gap-7 items-center px-6 md:items-start md:px-6">
-            <h1 className="text-6xl">{planet.name}</h1>
-            <p className="text-sm">{planet.overview.content}</p>
-            <div className="flex gap-2">
-              <p>
-                Source :{" "}
-                <span className="underline cursor-pointer">
-                  <a
-                    href={planet.overview.source}
-                    target="_blank"
-                    rel="noopener norefferer"
-                  >
-                    Wikipedia
-                  </a>
-                </span>
-              </p>
-              <img src={iconSource} alt="" className="h-3 self-center" />
-            </div>
-          </div>
-          <div className="hidden md:block">
-            <Tabs />
+    <div>
+      <Tabs planet={planet} />
+      <section className="flex flex-col items-center">
+        <img
+          src={planetImageUrl}
+          alt={planet.name}
+          className="w-[10rem] py-20"
+        />
+        <div className="text-center flex flex-col gap-6 items-center">
+          <h2 className="text-5xl font-[Antonio]">
+            {planet.name.toUpperCase()}
+          </h2>
+          <p>{planet[dataKey].content}</p>
+          <div className="flex gap-2 items-center text-sm">
+            <p>Source :</p>
+            <a
+              href={planet[dataKey].source}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cursor-pointer underline"
+            >
+              Wikipedia
+            </a>
+            <img src={iconSource} alt="" className="w-3 h-3" />
           </div>
         </div>
-        <div className="mt-6">
-          <GeologyStats planet={planet} />
-        </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
