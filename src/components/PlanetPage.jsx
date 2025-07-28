@@ -41,29 +41,37 @@ export default function PlanetPage() {
 
   return (
     <div>
-      <Tabs planet={planet} />
+      <div className="md:hidden">
+        <Tabs planet={planet} />
+      </div>
+
       <section className="flex flex-col items-center">
         <img
           src={planetImageUrl}
           alt={planet.name}
           className="w-[10rem] py-20"
         />
-        <div className="text-center flex flex-col gap-6 items-center">
-          <h2 className="text-5xl font-[Antonio]">
-            {planet.name.toUpperCase()}
-          </h2>
-          <p className="text-[#838391]">{planet[dataKey].content}</p>
-          <div className="flex gap-2 items-center text-sm text-[#838391]">
-            <p>Source :</p>
-            <a
-              href={planet[dataKey].source}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cursor-pointer underline "
-            >
-              Wikipedia
-            </a>
-            <img src={iconSource} alt="" className="w-3 h-3" />
+        <div className="text-center flex flex-col gap-6 items-center md:flex-row">
+          <div className="flex flex-col gap-4 md:gap-8 md:w-1/2 md:text-left">
+            <h2 className="text-5xl font-[Antonio]">
+              {planet.name.toUpperCase()}
+            </h2>
+            <p className="text-[#838391]">{planet[dataKey].content}</p>
+            <div className="flex gap-2 justify-center text-sm text-[#838391] md:justify-start">
+              <p>Source :</p>
+              <a
+                href={planet[dataKey].source}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cursor-pointer underline"
+              >
+                Wikipedia
+              </a>
+              <img src={iconSource} alt="" className="w-3 h-3" />
+            </div>
+          </div>
+          <div className="hidden md:block md:flex-1">
+            <Tabs planet={planet} />
           </div>
         </div>
       </section>
