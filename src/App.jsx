@@ -13,15 +13,15 @@ function App() {
     >
       <TabContextProvider>
         <MenuContextProvider>
-          <Layout>
-            <Routes>
-              <Route
-                path="/"
-                element={<Navigate to="/mercury" replace />}
-              ></Route>
-              <Route path="/:planetName" element={<PlanetPage />}></Route>
-            </Routes>
-          </Layout>
+          <Routes>
+            <Route
+              path="/"
+              element={<Navigate to="/mercury" replace />}
+            ></Route>
+            <Route path="/" element={<Layout />}>
+              <Route path=":planetName" element={<PlanetPage />} />
+            </Route>
+          </Routes>
         </MenuContextProvider>
       </TabContextProvider>
     </div>
