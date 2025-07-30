@@ -1,6 +1,6 @@
 import React from "react";
 import planets from "../Data/data.json";
-import iconChevron from "../Assets/Images/icon-Chevron.svg";
+import iconChevron from "../Assets/Images/icon-chevron.svg";
 import { Link } from "react-router-dom";
 import { useMenu } from "../Context/MenuContext";
 
