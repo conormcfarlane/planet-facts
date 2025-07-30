@@ -2,9 +2,9 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import PlanetPage from "./components/PlanetPage";
-import backgroundStars from "./Assets/Images/background-stars.svg";
 import { TabContextProvider } from "./Context/TabContext";
 import { MenuContextProvider } from "./Context/MenuContext";
+import backgroundStars from "./Assets/Images/background-stars.svg";
 function App() {
   return (
     <div
