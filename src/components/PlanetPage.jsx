@@ -46,19 +46,42 @@ export default function PlanetPage() {
       </div>
 
       <section className="flex flex-col items-center lg:flex-row">
-        <img
-          src={planetImageUrl}
-          alt={planet.name}
-          className="w-[10rem] py-20 lg:w-1/2 "
-        />
+        <div className="w-[10rem] py-20 lg:w-1/2 relative">
+          {/* If tab isnt geology render all images as normal, else when geology render image at 40% height and width and use itr as overlay image */}
+          {activeTab !== "geology" ? (
+            <img src={planetImageUrl} alt={planet.name} className="w-full" />
+          ) : (
+            <img
+              src={planetImageUrl}
+              alt={planet.name}
+              className="lg:absolute lg:bottom-0 lg:h-[40%] lg:w-[40%] lg:translate-x-[75%]"
+            />
+          )}
+
+          {/* Render .planet/overview image for large screens... using geology image above to be placed on top of it. */}
+          {activeTab === "geology" && (
+            <img
+              src={
+                images[
+                  `../Assets/Images/${planet.images.planet.split("/").pop()}`
+                ]
+              }
+              alt={planet.name}
+              className="hidden lg:block w-full"
+            />
+          )}
+        </div>
+
         <div className="text-center flex flex-col gap-6 items-center md:flex-row lg:flex-col lg:w-1/2 lg:items-end">
           <div className="flex flex-col gap-4 md:gap-8 md:w-1/2 md:text-left lg:w-3/4 ">
             <h2 className="text-5xl font-[Antonio]">
               {planet.name.toUpperCase()}
             </h2>
+            {/* dataKey will be overview,structure or geology */}
             <p className="text-[#838391]">{planet[dataKey].content}</p>
             <div className="flex gap-2 justify-center text-sm text-[#838391] md:justify-start">
               <p>Source :</p>
+              {/* dataKey will be overview,structure or geology */}
               <a
                 href={planet[dataKey].source}
                 target="_blank"
